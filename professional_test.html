@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Test - PCOS Detector</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-purple-500 to-pink-500 min-h-screen flex flex-col justify-between">
+  <!-- Header -->
+  <header class="flex items-center justify-between p-6 bg-white shadow-lg">
+    <h1 class="text-3xl font-bold text-red-600">PCOS Detector - Professional Test</h1>
+  </header>
+
+  <!-- Main Content -->
+  <section class="text-center mt-10 text-white">
+    <h2 class="text-3xl font-extrabold">Professional Test - Hormonal and Ultrasound Test</h2>
+    <form action="/professional_test_predict" method="post" enctype="multipart/form-data">
+      <!-- Input fields for hormonal levels, numeric fields for other data -->
+      <!-- File upload for ultrasound image -->
+      <input type="file" name="ultrasound_image" required />
+      <button type="submit" class="btn bg-yellow-500 text-white px-6 py-3 rounded-full font-semibold text-xl shadow-md hover:bg-yellow-600 transition mt-6">Submit</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-white mt-10 p-4">
+    <p class="text-lg">
+      Created by <span class="font-semibold text-yellow-200">AKS</span>
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PCOS Symptom Test</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(to right, #a18cd1, #fbc2eb);
+    }
+  </style>
+  <script>
+    async function submitForm(event) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch("/predict_symptom", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+        const result = await response.json();
+
+        const output = document.getElementById("prediction");
+        if (result.prediction === "PCOS") {
+          output.innerHTML = `<span class="text-red-200 font-bold">PCOS Detected.</span><br><span class="text-yellow-200">Please consult a doctor.</span>`;
+        } else {
+          output.innerHTML = `<span class="text-green-200 font-bold">No signs of PCOS.</span>`;
+        }
+
+      } catch (error) {
+        document.getElementById("prediction").innerText = "Error: " + error.message;
+      }
+    }
+  </script>
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center px-4 text-white">
+  <h1 class="text-4xl font-bold mb-6">PCOS Symptom Test</h1>
+
+  <form class="w-full max-w-lg space-y-4" onsubmit="submitForm(event)">
+    <!-- Symptom Checkboxes -->
+    <div><input type="hidden" name="hair_growth" value="0" />
+      <label><input type="checkbox" name="hair_growth" value="1" class="mr-2" />Hair Growth</label>
+    </div>
+    <div><input type="hidden" name="skin_darkening" value="0" />
+      <label><input type="checkbox" name="skin_darkening" value="1" class="mr-2" />Skin Darkening</label>
+    </div>
+    <div><input type="hidden" name="weight_gain" value="0" />
+      <label><input type="checkbox" name="weight_gain" value="1" class="mr-2" />Weight Gain</label>
+    </div>
+    <div><input type="hidden" name="pimples" value="0" />
+      <label><input type="checkbox" name="pimples" value="1" class="mr-2" />Pimples</label>
+    </div>
+    <div><input type="hidden" name="hair_loss" value="0" />
+      <label><input type="checkbox" name="hair_loss" value="1" class="mr-2" />Hair Loss</label>
+    </div>
+
+    <!-- Dropdowns -->
+    <div>
+      <label>Cycle Type</label>
+      <select name="cycle" class="w-full p-2 rounded text-black" required>
+        <option value="" disabled selected>Select</option>
+        <option value="R">Regular</option>
+        <option value="I">Irregular</option>
+      </select>
+    </div>
+    <div>
+      <label>Fast Food</label>
+      <select name="fast_food" class="w-full p-2 rounded text-black" required>
+        <option value="" disabled selected>Select</option>
+        <option value="Y">Yes</option>
+        <option value="N">No</option>
+      </select>
+    </div>
+
+    <!-- Numeric Inputs -->
+    <div><input type="number" name="weight_Kg" placeholder="Weight (Kg)" class="w-full p-2 rounded text-black" required /></div>
+    <div><input type="number" name="bmi" placeholder="BMI" class="w-full p-2 rounded text-black" required /></div>
+    <div><input type="number" name="age_yrs" placeholder="Age (Years)" class="w-full p-2 rounded text-black" required /></div>
+    <div><input type="number" name="waist_inch" placeholder="Waist (inches)" class="w-full p-2 rounded text-black" required /></div>
+    <div><input type="number" name="hip_inch" placeholder="Hip (inches)" class="w-full p-2 rounded text-black" required /></div>
+    <div><input type="number" name="cycle_length_days" placeholder="Cycle Length (days)" class="w-full p-2 rounded text-black" required /></div>
+
+    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 py-3 rounded-full font-bold text-white transition">
+      Submit
+    </button>
+  </form>
+
+  <div id="prediction" class="mt-6 text-xl font-semibold text-center"></div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PCOS Detector</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(to right, #a18cd1, #fbc2eb); /* Violet to pink gradient */
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center text-center px-4 text-white">
+
+  <h1 class="text-5xl font-bold mb-6">PCOS Detector</h1>
+
+  <!-- Replace this image with your own or keep as placeholder -->
+  <img src="/static/img.png" 
+       alt="PCOS Awareness" 
+       class="w-72 sm:w-96 mb-6 rounded-lg shadow-lg"/>
+
+  <p class="max-w-2xl text-lg mb-8">
+    Polycystic Ovary Syndrome (PCOS) is a hormonal disorder common among women of reproductive age.
+    It can cause irregular menstrual cycles, weight gain, acne, and fertility issues.
+    Early diagnosis and treatment can help manage symptoms and reduce the risk of long-term complications.
+    Start with a simple test today!
+  </p>
+
+  <div class="flex flex-col sm:flex-row gap-6">
+    <a href="/templates/symptomtest.html" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full transition">
+      General Test
+    </a>
+    <a href="/ultra" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full transition">
+      Professional Test
+    </a>
+  </div>
+
+</body>
+</html>
